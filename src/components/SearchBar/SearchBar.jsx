@@ -1,5 +1,5 @@
 import toast, { Toaster } from "react-hot-toast";
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -8,7 +8,9 @@ export default function SearchBar() {
       toast.error("You should enter a search term!", {
         position: "top-center",
       });
+      return;
     }
+    onSearch(topic);
     form.reset();
   };
 
