@@ -1,4 +1,6 @@
 import toast, { Toaster } from "react-hot-toast";
+import css from "./SearchBar.module.css";
+import { IoSearchOutline } from "react-icons/io5";
 export default function SearchBar({ onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,16 +17,19 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <header>
-      <form onSubmit={handleSubmit}>
+    <header className={css.header}>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <button className={css.button} type="submit">
+          <IoSearchOutline size="20px" />
+        </button>
         <input
+          className={css.input}
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
           name="topic"
         />
-        <button type="submit">Search</button>
         <Toaster />
       </form>
     </header>

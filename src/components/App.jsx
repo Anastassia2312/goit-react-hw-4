@@ -26,6 +26,7 @@ function App() {
         setLoading(true);
         setError(false);
         const photos = await fetchImages(query, page);
+        console.log(photos);
         setImages((prevImages) => {
           return [...prevImages, ...photos];
         });
@@ -58,7 +59,7 @@ function App() {
   }
 
   return (
-    <>
+    <div>
       <SearchBar onSearch={getPhotos} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
@@ -75,7 +76,7 @@ function App() {
           image={selectedImage}
         />
       )}
-    </>
+    </div>
   );
 }
 
