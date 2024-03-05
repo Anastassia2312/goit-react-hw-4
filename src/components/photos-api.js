@@ -13,6 +13,6 @@ const fetchImages = async (searchQuery, page) => {
       Authorization: "Client-ID NmPj7W4tfuHcl3mc-abFvD3rqhwZ3Mn6vHYr4WuS3T8",
     },
   });
-  return response.data;
+  return response.data.results;
 };
 export default fetchImages;

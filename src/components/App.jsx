@@ -62,13 +62,15 @@ function App() {
       <SearchBar onSearch={getPhotos} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
-      {images.length > 0 && <ImageGallery items={images} />}
+      {images.length > 0 && (
+        <ImageGallery items={images} onOpenModal={openModal} />
+      )}
       {images.length > 0 && !loading && (
         <LoadMoreBtn loadMore={handleLoadMore} />
       )}
       {selectedImage && (
         <ModalWindow
-          isOpen={openModal}
+          isOpen={modalOpen}
           onClose={closeModal}
           image={selectedImage}
         />
