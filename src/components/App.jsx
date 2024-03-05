@@ -15,7 +15,7 @@ function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (query === "") {
@@ -26,7 +26,6 @@ function App() {
         setLoading(true);
         setError(false);
         const photos = await fetchImages(query, page);
-        console.log(photos);
         setImages((prevImages) => {
           return [...prevImages, ...photos];
         });
@@ -39,7 +38,7 @@ function App() {
     fetchPhotos();
   }, [query, page]);
 
-  const getPhotos = async (searchQuery) => {
+  const getPhotos = (searchQuery) => {
     setQuery(searchQuery);
     setPage(1);
     setImages([]);
@@ -51,11 +50,11 @@ function App() {
 
   function openModal(image) {
     setSelectedImage(image);
-    setModalOpen(true);
+    setIsOpen(true);
   }
 
   function closeModal() {
-    setModalOpen(false);
+    setIsOpen(false);
   }
 
   return (
@@ -64,14 +63,14 @@ function App() {
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {images.length > 0 && (
-        <ImageGallery items={images} onOpenModal={openModal} />
+        <ImageGallery items={images} openModal={openModal} />
       )}
       {images.length > 0 && !loading && (
         <LoadMoreBtn loadMore={handleLoadMore} />
       )}
       {selectedImage && (
         <ModalWindow
-          isOpen={modalOpen}
+          isOpen={isOpen}
           onClose={closeModal}
           image={selectedImage}
         />
